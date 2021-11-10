@@ -764,7 +764,10 @@ class DBusClient {
         throw 'D-Bus address transport not supported: $_address';
     }
 
+    try {
     _socket = await RawSocket.connect(socketAddress, port);
+    } catch(e) {
+    }
     _socket?.listen((event) {
       if (event == RawSocketEvent.read) {
         _readData();
