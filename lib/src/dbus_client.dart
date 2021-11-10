@@ -782,7 +782,10 @@ class DBusClient {
         throw 'D-Bus address transport not supported: $_address';
     }
 
+    try {
     _socket = await Socket.connect(socketAddress, port);
+    } catch(e) {
+    }
     _socket?.listen(_processData,
         onError: (error) {}, onDone: () => _socket!.close());
     unawaited(_socket?.done.then((value) {
